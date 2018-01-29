@@ -1,0 +1,992 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DaggerLib</name>
+    </assembly>
+    <members>
+        <member name="T:DaggerLib.Core.DaggerBasePin">
+            <summary>
+            The Base class for Dagger Input and Output pins.
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerBasePin.#ctor">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="E:DaggerLib.Core.DaggerBasePin.PinDataSet">
+            <summary>
+            Event that is raised when the Pin's data has been set
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerBasePin.MutexGroup">
+            <summary>
+            Gets or sets the Mutual Exclusion Group this pin belongs to
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerBasePin.IsInterfacePin">
+            <summary>
+            Gets flag indicating the pin is part of an imported/exported pin interface
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerBasePin.MutexAvailable">
+            <summary>
+            Gets if the pin is available based on context of it's Mutex Group and connection status
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerBasePin.DataTypeString">
+            <summary>
+            Gets or sets the Data Type this pin can receive or send
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerBasePin.DataType">
+            <summary>
+            Gets or sets the Data Type this pin transmits/receives
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerBasePin.DataTypeCode">
+            <summary>
+            Gets the Data Type Code of this pin
+            </summary>
+        </member>
+        <member name="F:DaggerLib.Core.DaggerGraph._subGraphToSerialize">
+            <summary>
+            Which subgraph to serialize.  -1 for all subgraphs
+            </summary>
+        </member>
+        <member name="F:DaggerLib.Core.DaggerGraph._selectionToSerialize">
+            <summary>
+            Selection of nodes and noodles to serialize
+            </summary>
+        </member>
+        <member name="F:DaggerLib.Core.DaggerGraph._assistNodes">
+            <summary>
+            Nodes that need assistance deserializing because they're not marked "Serializable"
+            </summary>
+        </member>
+        <member name="F:DaggerLib.Core.DaggerGraph._scheduler">
+            <summary>
+            Graph scheduler that performs processing of the the graph
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.#ctor(DaggerLib.Core.DaggerInterface)">
+            <summary>
+            Construct an empty DaggerGraph from a Pin Interface
+            </summary>
+            <param name="pinInterface"></param>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Deserialization Constructor
+            </summary>
+            <param name="info"></param>
+            <param name="ctxt"></param>
+        </member>
+        <member name="E:DaggerLib.Core.DaggerGraph.OnTopologyChanged">
+            <summary>
+            Called whenever a node is added/removed or a pin is connected/disconnected
+            </summary>
+        </member>
+        <member name="E:DaggerLib.Core.DaggerGraph.NodeAdded">
+            <summary>
+            Called when a node has been added to the graph
+            </summary>
+        </member>
+        <member name="E:DaggerLib.Core.DaggerGraph.BeforeNodeRemoved">
+            <summary>
+            Called before a node is removed from the graph
+            </summary>
+        </member>
+        <member name="E:DaggerLib.Core.DaggerGraph.AfterNodeRemoved">
+            <summary>
+            Called after a node is removed from the graph
+            </summary>
+        </member>
+        <member name="E:DaggerLib.Core.DaggerGraph.BeforePinsConnected">
+            <summary>
+            Called before two pins are connected
+            </summary>
+        </member>
+        <member name="E:DaggerLib.Core.DaggerGraph.AfterPinsConnected">
+            <summary>
+            Called after two pins are connected
+            </summary>
+        </member>
+        <member name="E:DaggerLib.Core.DaggerGraph.BeforePinsDisconnected">
+            <summary>
+            Called before two pins are disconnected
+            </summary>
+        </member>
+        <member name="E:DaggerLib.Core.DaggerGraph.AfterPinsDisconnected">
+            <summary>
+            Called after two pins are disconnected
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerGraph.UILayout">
+            <summary>
+            Get the stored layout of ui elements
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerGraph.ParentSubNode">
+            <summary>
+            Gets the SubNode this graph lies within
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerGraph.SelectionToSerialize">
+            <summary>
+            Sets a selection of Nodes and Noodles to serialize
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerGraph.SubGraphCount">
+            <summary>
+            Gets the number of subgraphs in this graph
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerGraph.Item(System.Int32)">
+            <summary>
+            Gets the nodes in a subgraph of this graph
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerGraph.Item(System.Int32,System.Int32)">
+            <summary>
+            Gets all the nodes in an Ordinal of a SubGraph
+            </summary>
+            <param name="subgraph"></param>
+            <param name="ordinal"></param>
+            <returns></returns>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerGraph.TopLevelNodes">
+            <summary>
+            Get list of all nodes that have no connected input pins
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerGraph.BottomLevelNodes">
+            <summary>
+            Get list of all nodes that have no connected output pins
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerGraph.Item(DaggerLib.Interfaces.ISelector)">
+            <summary>
+            Get a list of all valid pin connections in a selection
+            </summary>
+            <param name="nodes"></param>
+            <param name="includeExports"></param>
+            <returns></returns>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerGraph.Item(System.Int32,System.Boolean)">
+            <summary>
+            Get a list of all pin connections in a subgraph
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerGraph.AllGuidConnections">
+            <summary>
+            Get a list of all pin connections in this graph
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.OnBeforeNodeRemoved(DaggerLib.Core.DaggerNode)">
+            <summary>
+            Call the BeforeNodeRemoved Handler
+            </summary>
+            <param name="node"></param>
+            <returns>true if node can be removed</returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.OnBeforePinsConnected(DaggerLib.Core.DaggerOutputPin,DaggerLib.Core.DaggerInputPin)">
+            <summary>
+            Call before connect event to see if the two pins can be connected
+            </summary>
+            <param name="connectFrom"></param>
+            <param name="connectTo"></param>
+            <returns>true if pins can be connected</returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.OnBeforePinsDisconnected(DaggerLib.Core.DaggerOutputPin,DaggerLib.Core.DaggerInputPin)">
+            <summary>
+            Call before disconnect event to see if the two pins can be connected
+            </summary>
+            <param name="connectFrom"></param>
+            <param name="connectTo"></param>
+            <returns>true if pins can be disconnected</returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.GetImportPin(System.String,System.Type)">
+            <summary>
+            Find and return an imported pin
+            </summary>
+            <param name="PinName">Name of Pin to find</param>
+            <param name="PinDataType">Data Type of pin to find</param>
+            <returns></returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.GetExportPin(System.String,System.Type)">
+            <summary>
+            Find and return an imported pin
+            </summary>
+            <param name="PinName">Name of Pin to find</param>
+            <param name="PinDataType">Data Type of pin to find</param>
+            <returns></returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.SetSchedulerType(System.Type)">
+            <summary>
+            Creates a Graph Scheduler of Type schedulertype for this Graph and all subnodes of the Graph
+            </summary>
+            <param name="schedulertype"></param>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.OrdinalCount(System.Int32)">
+            <summary>
+            Get the number of Ordinals in a subgraph
+            </summary>
+            <param name="subgraph"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.AddNode(DaggerLib.Core.DaggerNode)">
+            <summary>
+            Add a DaggerNode to this graph
+            </summary>
+            <param name="node"></param>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.SerializeSubGraph(System.Int32)">
+            <summary>
+            Serialize a subgraph in the DaggerGraph to a byte array
+            </summary>
+            <param name="subGraphToSerialize">subgraph index to serialize</param>
+            <returns>An array of bytes containing a binary serialization of the subgraph</returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.SerializeGraph">
+            <summary>
+            Serialize the entire DaggerGraph to a byte array
+            </summary>
+            <returns>An array of bytes containing a binary serialization of the Graph</returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.ClearGraph">
+            <summary>
+            Remove all nodes from a graph
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.DeleteNode(DaggerLib.Core.DaggerNode)">
+            <summary>
+            Removes a node from this graph
+            </summary>
+            <param name="node"></param>
+            <returns>true of succeeded</returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.AppendGraph(DaggerLib.Core.DaggerGraph)">
+            <summary>
+            Append DaggerGraph to this this Graph
+            </summary>
+            <param name="graph"></param>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.CalculateTopology">
+            <summary>
+            Calculate the precedence of execution order and subgraph affiliation of each node
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Serialization GetObjectData.  DaggerGraph can serialize in one of 3 states: All, Subgraph, and Selected
+            </summary>
+            <param name="info"></param>
+            <param name="ctxt"></param>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.OnDeserializingMethod(System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Callback method before Deserialization begins
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerGraph.OnDeserializedMethod(System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Callback method after Deserialization completes
+            </summary>
+            <param name="ctxt"></param>
+        </member>
+        <member name="T:DaggerLib.Core.PinConnection">
+            <summary>
+            Class that represents the connection of two pins
+            </summary>
+        </member>
+        <member name="T:DaggerLib.Core.OrdinalComparer">
+            <summary>
+            Comparer class to sort DaggerNodes by thier Ordinal Number
+            </summary>
+        </member>
+        <member name="E:DaggerLib.Core.DaggerInputPin.PinConnected">
+            <summary>
+            Called after the pin is connected
+            </summary>
+        </member>
+        <member name="E:DaggerLib.Core.DaggerInputPin.PinDisconnected">
+            <summary>
+            Called after after the Pin is Disconnected
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerInputPin.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Deserialization Constructor
+            </summary>
+            <param name="info"></param>
+            <param name="ctxt"></param>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerInputPin.Disconnect(System.Boolean)">
+            <summary>
+            Disconnect link going to output
+            </summary>
+            <returns>true if disconnect succeded</returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerInputPin.InvokeAfterConnect">
+            <summary>
+            Becuase DaggerOuputPin actually performs all the work of connecting/disconnected, we need these
+            internal methods to let DaggerOuputPin raise the connection events on the DaggerInputPin
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerInputPin.ParentCollection">
+            <summary>
+            Get the pin collection this pin belongs to
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerInputPin.AutoClone">
+            <summary>
+            Gets or sets if this pin creates a new InputPin when it is connected
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerInputPin.WasCloned">
+            <summary>
+            Gets if this pin was created by autocloning
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerInputPin.ConnectedToOutput">
+            <summary>
+            Gets the OutputPin this is connectected to.
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerInputPin.ConnectedToGuid">
+            <summary>
+            Get the InstanceGuid of the pin this is connected to
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerInputPin.Data">
+            <summary>
+            Gets the data of the output pin connected to this pin
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerInputPin.IsConnected">
+            <summary>
+            Gets if this Input Pin is Connected to an Output Pin
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerInterface.#ctor(DaggerLib.Core.DaggerNode)">
+            <summary>
+            Contruct a DaggerInterface from an existing DaggerNode
+            </summary>
+            <param name="node"></param>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerInterface.#ctor(DaggerLib.Core.DaggerInterface)">
+            <summary>
+            Construct a new DaggerInterface from an exisiting one
+            </summary>
+            <param name="daggerInterface"></param>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerInterface.ContainsImportPin(DaggerLib.Core.DaggerInterfacePin)">
+            <summary>
+            Returns true if interface contains a given Imported DaggerInterfacePin
+            </summary>
+            <param name="pin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerInterface.ContainsExportPin(DaggerLib.Core.DaggerInterfacePin)">
+            <summary>
+            Returns true if interface contains a given Exported DaggerInterfacePin
+            </summary>
+            <param name="pin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerInterface.GraphImplements(DaggerLib.Core.DaggerGraph)">
+            <summary>
+            Returns true if given DaggerGraph implements this DaggerInterface
+            </summary>
+            <param name="Graph"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerInterface.Implements(DaggerLib.Core.DaggerInterface)">
+            <summary>
+            Returns true if this implements given DaggerInterface
+            </summary>
+            <param name="daggerInterface"></param>
+            <returns></returns>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerInterface.InputPins">
+            <summary>
+            Gets a Deep Copy of the interface's InputPins
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerInterface.OutputPins">
+            <summary>
+            Gets a Deep Copy of the interface's OutputPins
+            </summary>
+        </member>
+        <member name="T:DaggerLib.Core.DaggerInterfacePin">
+            <summary>
+            Class that represents a pin name/datatype pair for a DaggerInterface
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerNode.NodeCategory">
+            <summary>
+            Returns the Category the Node belongs to.  Override to provide information on where
+            the node should be placed in a TreeView. 
+            Return value should be of format "(Category Name)" or "(Category Name),(Node Name)"
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerNode.Ordinal">
+            <summary>
+            The Execution order of this node in relation to it's subgraph siblings
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerNode.SubgraphAffiliation">
+            <summary>
+            The Discreet subgraph this node belongs to
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerNode.IsTopLevel">
+            <summary>
+            Returns true if this node has no connected input pins
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerNode.IsBottomLevel">
+            <summary>
+            Returns true if this node has no connected output pins
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerNode.InputMutexGroupsConnected">
+            <summary>
+            Get all the Input Pin Mutex Groups that are fully connected
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerNode.OutputMutexGroupsConnected">
+            <summary>
+            Get all the Output Pin Mutex Groups that are fully connected
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerNode.IsInputMutexGroupsConnected(DaggerLib.Core.PinMutexGroups)">
+            <summary>
+            Gets if all input pins in a mutex group(s) is(are) connected
+            </summary>
+            <param name="groups">Mutex group(s) to check for connections</param>
+            <returns>true if all pins are connected</returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerNode.IsOutputMutexGroupsConnected(DaggerLib.Core.PinMutexGroups)">
+            <summary>
+            Gets if all output pins in a mutex group(s) is(are) connected
+            </summary>
+            <param name="groups">Mutex group(s) to check for connections</param>
+            <returns>true if all pins are connected</returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerNode.InvokeUINodeAttached(DaggerLib.Interfaces.IDaggerUINode)">
+            <summary>
+            Raises the DaggerUINodeAttached event on this Node
+            </summary>
+            <param name="uinode"></param>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerNode.Process">
+            <summary>
+            Begin Processing subgraph starting at this node
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerNode.DisconnectAllPins">
+            <summary>
+            Disconnect all pins connected to this node
+            </summary>
+            <returns>true if all pins diconnected</returns>
+        </member>
+        <member name="E:DaggerLib.Core.DaggerNode.DaggerUINodeAttached">
+            <summary>
+            Event that is raised when a DaggerUINode is attached to this node
+            </summary>
+        </member>
+        <member name="E:DaggerLib.Core.DaggerNode.BeforeNodeRemoved">
+            <summary>
+            Event that is rasied before a node is removed from it's container
+            </summary>
+        </member>
+        <member name="E:DaggerLib.Core.DaggerNode.AfterNodeRemoved">
+            <summary>
+            Event that is rasied after a node is removed from it's container
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerNode.DoProcessing">
+            <summary>
+            Override to provide processing of the node from a Graph Scheduler
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerNode.OnBeforeNodeRemoved">
+            <summary>
+            Called before a node is removed from it's container
+            </summary>
+            <returns>true if node can be safely removed</returns>
+        </member>
+        <member name="E:DaggerLib.Core.DaggerOutputPin.PinConnected">
+            <summary>
+            Called after the pin is connected
+            </summary>
+        </member>
+        <member name="E:DaggerLib.Core.DaggerOutputPin.PinDisconnected">
+            <summary>
+            Called after after the Pin is Disconnected
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerOutputPin.#ctor">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerOutputPin.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Deserialization Constructor
+            </summary>
+            <param name="info"></param>
+            <param name="ctxt"></param>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerOutputPin.CanConnectToPin(DaggerLib.Core.DaggerBasePin)">
+            <summary>
+            Returns true if this output pin can connect to a given input pin based on relationship in the Graph
+            </summary>
+            <param name="pin">input pin to test</param>
+            <returns>true if pins can connect</returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerOutputPin.ConnectToInput(DaggerLib.Core.DaggerInputPin)">
+            <summary>
+            Connect this pin to Input Pin
+            </summary>
+            <param name="input">pin to connect to</param>
+            <returns>true if succeded</returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerOutputPin.Disconnect(DaggerLib.Core.DaggerInputPin,System.Boolean)">
+            <summary>
+            Disconnect link going to input
+            </summary>
+            <param name="input">Input pin to disconnect from</param>
+            <param name="forceDisconnect">if true, ignore pre-disconnect testing</param>
+            <returns>true if disconnect succeded</returns>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerOutputPin.Disconnect(System.Boolean)">
+            <summary>
+            Disconnect ALL pins to this output
+            </summary>
+            <returns>true if succeded</returns>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerOutputPin.ParentCollection">
+            <summary>
+            Get the pin collection this pin belongs to
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerOutputPin.AllowMultiConnect">
+            <summary>
+            Gets or Sets if this pin can connect to multiple Input Pins
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerOutputPin.IsConnected">
+            <summary>
+            Gets if this pin is connected to any Input Pins
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerOutputPin.PassByClone">
+            <summary>
+            Gets or sets if this Pin passes data by cloning it
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerOutputPin.Data">
+            <summary>
+            Gets or sets the data this pin sends to Input Pins
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerOutputPin.ConnectedTo">
+            <summary>
+            Get the list of Input pins this is connected to
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerOutputPin.ConnectedToGuids">
+            <summary>
+            Get a list of the Input Pin's guids this is connected to
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerPinCollection`1.ConnectedPins">
+            <summary>
+            Gets a list of all pins that have a connection
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerPinCollection`1.Item(System.String)">
+            <summary>
+            Get a pin by it's name
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerPinCollection`1.Item(System.Guid)">
+            <summary>
+            Get a pin by it's guid
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerPinCollection`1.MutexAvailablePins">
+            <summary>
+            Get list of pins available based on context of Mutex Group and connection status
+            </summary>
+        </member>
+        <member name="P:DaggerLib.Core.DaggerPinCollection`1.List">
+            <summary>
+            Gets the list of pins in the collection
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerPinCollection`1.UniqueName(System.String)">
+            <summary>
+            Append a numerical value to a pin's name to make it unique from existing names
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DaggerLib.Core.DaggerSubNode">
+            <summary>
+            Node that acts as a nexus into and out of a Subroutine Graph
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerSubNode.#ctor(System.String,System.Byte[])">
+            <summary>
+            Create a new subnode from a serialized graph
+            </summary>
+            <param name="buffer"></param>
+        </member>
+        <member name="M:DaggerLib.Core.DaggerSubNode.OnDeserializedMethod(System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Callback method after Deserialization completes
+            </summary>
+            <param name="ctxt"></param>
+        </member>
+        <member name="T:DaggerLib.Core.DaggerPinNameChanged">
+            <summary>
+            Handler for when a pin's name changes
+            </summary>
+            <param name="pin"></param>
+        </member>
+        <member name="T:DaggerLib.Core.DaggerPinDataTypeChanged">
+            <summary>
+            Handler for when a pin's Data Type has changed
+            </summary>
+            <param name="pin"></param>
+        </member>
+        <member name="T:DaggerLib.Core.BeforeNodeRemoveHandler">
+            <summary>
+            Handler before a node is added/removed from a container panel
+            </summary>
+            <param name="node"></param>
+            <param name="panel"></param>
+            <returns>true if node can be removed</returns>
+        </member>
+        <member name="T:DaggerLib.Core.BeforeDeleteSelected">
+            <summary>
+            Handler called before a selection of Noodles and Nodes are deleted
+            </summary>
+            <param name="sender">UIGraph</param>
+            <returns>true if selection can be deleted</returns>
+        </member>
+        <member name="T:DaggerLib.Core.AfterDeleteSelected">
+            <summary>
+            Handler called after a selection of Noodles and Nodes have been deleted
+            </summary>
+            <param name="sender"></param>
+        </member>
+        <member name="T:DaggerLib.Core.AfterNodeRemoveHandler">
+            <summary>
+            Handler after a node is added/removed from a container panel
+            </summary>
+            <param name="node"></param>
+            <param name="panel"></param>
+        </member>
+        <member name="T:DaggerLib.Core.PinBeforeConnectedHandler">
+            <summary>
+            Called before 2 pins are connected
+            </summary>
+            <param name="output"></param>
+            <param name="input"></param>
+            <returns>true if the pins can be connected</returns>
+        </member>
+        <member name="T:DaggerLib.Core.PinBeforeDisconnectedHandler">
+            <summary>
+            Called before 2 pins are disconnected
+            </summary>
+            <param name="output"></param>
+            <param name="input"></param>
+            <returns>returns true if pins can be disconnected</returns>
+        </member>
+        <member name="T:DaggerLib.Core.PinAfterConnectedHandler">
+            <summary>
+            Called After 2 pins have been connected
+            </summary>
+            <param name="output"></param>
+            <param name="input"></param>
+        </member>
+        <member name="T:DaggerLib.Core.PinAfterDisconnectedHandler">
+            <summary>
+            Called After 2 pins have been disconnected
+            </summary>
+            <param name="output"></param>
+            <param name="input"></param>
+        </member>
+        <member name="T:DaggerLib.Core.DaggerNodeAttachedHandler">
+            <summary>
+            Called when a Dagger node is attached to a DaggerUINode
+            </summary>
+            <param name="node"></param>
+        </member>
+        <member name="T:DaggerLib.Core.DaggerUINodeAttachedHandler">
+            <summary>
+            Called when a Dagger node is attached to a DaggerUINode
+            </summary>
+            <param name="node"></param>
+        </member>
+        <member name="T:DaggerLib.Core.DaggerBasePinBeforeShowContextMenuHandler">
+            <summary>
+            Called before a base pin shows it's context menu
+            </summary>
+            <param name="pin"></param>
+        </member>
+        <member name="T:DaggerLib.Core.OrdinalExecutionScheduler">
+            <summary>
+            Default non-threaded Graph scheduler class
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Core.OrdinalExecutionScheduler.ProcessGraph">
+            <summary>
+            Process the entire graph and it's subgraphs
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Core.OrdinalExecutionScheduler.ProcessGraph(DaggerLib.Core.DaggerNode)">
+            <summary>
+            Process the graph from a given node
+            </summary>
+            <param name="node"></param>
+        </member>
+        <member name="P:DaggerLib.Interfaces.IGraphScheduler.Graph">
+            <summary>
+            Gets or sets the graph this Scheduler will operate on
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Interfaces.IGraphScheduler.CancelProcessing">
+            <summary>
+            Cancels the current processing of the graph
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Interfaces.IGraphScheduler.OnTopologyChanged">
+            <summary>
+            Called when the topology of the graph has changed
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Interfaces.IGraphScheduler.ProcessGraph">
+            <summary>
+            Process the entire graph and it's subgraphs
+            </summary>
+        </member>
+        <member name="M:DaggerLib.Interfaces.IGraphScheduler.ProcessGraph(DaggerLib.Core.DaggerNode)">
+            <summary>
+            Process the graph from a given node
+            </summary>
+            <param name="node"></param>
+        </member>
+        <member name="T:DaggerLib.UI.GraphLayout">
+            <summary>
+            Class to serialize UI layout with a DaggerGraph.  Make sure overidden class is marked Serializable.
+            </summary>
+        </member>
+        <member name="M:PIEBALD.Lib.LibSys.GetTypes(System.Collections.IEnumerable)">
+                        <summary>
+                            Takes an IEnumerable and returns a System.Type[]
+                        </summary>
+                        <param name="Items">
+                            The items whose Types you want
+                        </param>
+                        <returns>
+                            An array containing the System.Types of the Items
+                        </returns>
+        </member>
+        <member name="T:PIEBALD.Types.Set`1">
+                <summary>
+                    Represents a Set.
+                </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.#ctor(System.Object[])">
+                    <summary>
+                        Constructs and populates a Set.
+                    </summary>
+                    <param name="Items">
+                        (Optional) Items to add to the new Set.
+                    </param>
+        </member>
+        <member name="P:PIEBALD.Types.Set`1.Cardinality">
+                    <return>
+                        The number of elements in the Set.
+                    </return>
+        </member>
+        <member name="P:PIEBALD.Types.Set`1.EqualityComparer">
+                    <return>
+                        The System.Collections.Generic.IEqualityComparer to use
+                    </return>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.op_Implicit(`0)~PIEBALD.Types.Set{`0}">
+                    <summary>
+                        Converts an item to a Set
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.op_Implicit(`0[])~PIEBALD.Types.Set{`0}">
+                    <summary>
+                        Converts an array of items to a Set
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.op_Implicit(System.Array)~PIEBALD.Types.Set{`0}">
+                    <summary>
+                        Converts an array of items to a Set
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.op_Implicit(System.Collections.CollectionBase)~PIEBALD.Types.Set{`0}">
+                    <summary>
+                        Converts a Collection of items to a Set
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.op_Implicit(System.Collections.ArrayList)~PIEBALD.Types.Set{`0}">
+                    <summary>
+                        Converts an ArrayList of items to a Set
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.op_Addition(PIEBALD.Types.Set{`0},PIEBALD.Types.Set{`0})">
+                    <summary>
+                        Union of the two Sets; Set of items that are elements of at least one of the Sets.
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.op_Subtraction(PIEBALD.Types.Set{`0},PIEBALD.Types.Set{`0})">
+                    <summary>
+                        Relative complement; items that are elements of the first Set, but not Elements of the second Set.
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.op_BitwiseOr(PIEBALD.Types.Set{`0},PIEBALD.Types.Set{`0})">
+                    <summary>
+                        Union of the two Sets; items that are elements of at least one of the Sets.
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.op_BitwiseAnd(PIEBALD.Types.Set{`0},PIEBALD.Types.Set{`0})">
+                    <summary>
+                        Intersection of the two Sets; items that are elements of both of the Sets.
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.op_ExclusiveOr(PIEBALD.Types.Set{`0},PIEBALD.Types.Set{`0})">
+                    <summary>
+                        Exclusive Or of the two Sets; items that are elements of only one of the Sets.
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.op_Equality(PIEBALD.Types.Set{`0},PIEBALD.Types.Set{`0})">
+                    <summary>
+                        Test equality of Sets; True if both Sets have the same elements
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.op_Inequality(PIEBALD.Types.Set{`0},PIEBALD.Types.Set{`0})">
+                    <summary>
+                        Test inequality of Sets; True if the Sets do not have the same elements
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.op_LessThan(PIEBALD.Types.Set{`0},PIEBALD.Types.Set{`0})">
+                    <summary>
+                        Subset; true if the first Set is a subset of (but is not equal to) the second
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.op_GreaterThan(PIEBALD.Types.Set{`0},PIEBALD.Types.Set{`0})">
+                    <summary>
+                        Superset; true if the first Set is a superset of (but is not equal to) the second 
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.op_LessThanOrEqual(PIEBALD.Types.Set{`0},PIEBALD.Types.Set{`0})">
+                    <summary>
+                        Subset; true if the first Set is a subset of the second 
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.op_GreaterThanOrEqual(PIEBALD.Types.Set{`0},PIEBALD.Types.Set{`0})">
+                    <summary>
+                        Superset; true if the first Set is a superset of the second 
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.GetEnumerator">
+                    <summary>
+                        Enumerator for the elements of the Set
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.Equals(System.Object)">
+                    <summary>
+                        Yada yada yada
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.GetHashCode">
+                    <summary>
+                        Yada yada yada
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.ToString">
+                    <summary>
+                        Returns the elements of the Set in set format; { element1 , element2 ... }
+                    </summary>
+                    <remarks>
+                        ToString() is called on each element in turn.
+                        No attempt is made to protect against elements whose ToString() values contain commas or braces.
+                    </remarks>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.ToString(PIEBALD.Types.SortMode,System.Object[])">
+                    <summary>
+                        Returns the elements of the Set in set format; { element1 , element2 ... }
+                    </summary>
+                    <param name="SortMode">
+                        Whether or not to sort the elements.
+                    </param>
+                    <param name="FormatInfo">
+                        (Optional) Formatting information to pass to ToString()
+                    </param>
+                    <remarks>
+                        ToString() is called on each element in turn.
+                        No attempt is made to protect against elements whose ToString() values contain commas or braces.
+                    </remarks>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.Add(System.Object[])">
+                    <summary>
+                        Attempts to add Items to the Set
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.Remove(System.Object[])">
+                    <summary>
+                        Attempts to remove Items from the Set
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.Contains(System.Object[])">
+                    <summary>
+                        Returns true if the Set contains the Item(s)
+                    </summary>
+        </member>
+        <member name="M:PIEBALD.Types.Set`1.Clear">
+                    <summary>
+                        Removes all elements from the Set
+                    </summary>
+        </member>
+        <member name="T:PIEBALD.Types.SortMode">
+                <summary>
+                    What type of sorting to perform
+                </summary>
+        </member>
+        <member name="F:PIEBALD.Types.SortMode.None">
+                        <summary>
+                            No sorting
+                        </summary>
+        </member>
+        <member name="F:PIEBALD.Types.SortMode.Native">
+                        <summary>
+                            Perform the sort before performing the ToString()s
+                        </summary>
+        </member>
+        <member name="F:PIEBALD.Types.SortMode.String">
+                        <summary>
+                            Perform the sort after performing the ToString()s
+                        </summary>
+        </member>
+    </members>
+</doc>

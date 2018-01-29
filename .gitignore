@@ -23,6 +23,28 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+bin/
+DaggerLib/lib
+DaggerLib/bin
+DaggerLib/obj
+DaggerLib.DSGraphEdit/lib
+DaggerLib.DSGraphEdit/bin
+DaggerLib.DSGraphEdit/obj
+DaggerLib.UI.Windows/lib
+DaggerLib.UI.Windows/bin
+DaggerLib.UI.Windows/obj
+DirectShowNet/lib
+DirectShowNet/bin
+DirectShowNet/obj
+DSGraphEdit/lib
+DSGraphEdit/bin
+DSGraphEdit/obj
+DSGraphEditDemo32/lib
+DSGraphEditDemo32/bin
+DSGraphEditDemo32/obj
+MediaFoundationNet/lib
+MediaFoundationNet/bin
+MediaFoundationNet/obj
 
 # Visual Studio 2015 cache/options directory
 .vs/

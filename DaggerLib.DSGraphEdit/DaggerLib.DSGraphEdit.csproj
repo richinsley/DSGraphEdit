@@ -1,0 +1,269 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{404C97A0-B6C6-4BD4-AEF0-9D830F329F35}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DaggerLib.DSGraphEdit</RootNamespace>
+    <AssemblyName>DaggerLib.DSGraphEdit</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>lib\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>lib\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DaggerLib, Version=1.0.2897.17949, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DaggerLib.UI.Windows\DaggerLib.dll</HintPath>
+    </Reference>
+    <Reference Include="DaggerLib.UI.Windows, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DaggerLib.UI.Windows\DaggerLib.UI.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="MediaFoundation">
+      <HintPath>..\MediaFoundationNet\lib\MediaFoundation.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DMOParameterControls\ColorTrackbar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DMOParameterControls\DMOBoolParam.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DMOParameterControls\DMOEnumParam.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DMOParameterControls\DMONumericalParam.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DSFiltersPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DSFiltersPanel.Designer.cs">
+      <DependentUpon>DSFiltersPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DSFilterTreeView\FilterData.cs" />
+    <Compile Include="DSFilterTreeView\FilterPropertiesPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DSFilterTreeView\FilterPropertiesPanel.Designer.cs">
+      <DependentUpon>FilterPropertiesPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DSGraphEditControls\DSDaggerUIGraph.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DSGraphEditControls\DSFilterNode.cs" />
+    <Compile Include="DSGraphEditControls\DSFilterNodeUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DSFilterTreeView\BaseFilterCategory.cs" />
+    <Compile Include="DSFilterTreeView\DMOAudioCaptureEffectsCategory.cs" />
+    <Compile Include="DSFilterTreeView\DMOAudioEffectsCategory.cs" />
+    <Compile Include="DSFilterTreeView\DMOVideoEffectsCategory.cs" />
+    <Compile Include="DSFilterTreeView\DSFilterTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DSFilterTreeView\DSFilterTreeViewNode.cs" />
+    <Compile Include="DSFilterTreeView\EffectsCategory.cs" />
+    <Compile Include="DSFilterTreeView\EncAPIEncodersCategory.cs" />
+    <Compile Include="DSFilterTreeView\EncAPIMultiplexersCategory.cs" />
+    <Compile Include="DSFilterTreeView\IDSFilterCollection.cs" />
+    <Compile Include="DSFilterTreeView\StandardFilterCategory.cs" />
+    <Compile Include="DSGraphEditPanelProperties.cs" />
+    <Compile Include="DSGraphEditControls\FilterGraphTools.cs" />
+    <Compile Include="DSGraphEditControls\PinIPTypes.cs" />
+    <Compile Include="DSGraphEditControls\PropertiesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DSGraphEditControls\PropertiesDialog.Designer.cs">
+      <DependentUpon>PropertiesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DSGraphEditControls\PinPropertiesTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DSGraphEditControls\PinsComboBoxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DSGraphEditControls\PinsComboBoxForm.Designer.cs">
+      <DependentUpon>PinsComboBoxForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DSGraphEditControls\ROTEntriesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DSGraphEditControls\ROTEntriesDialog.designer.cs">
+      <DependentUpon>ROTEntriesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DSGraphEditControls\URLDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DSGraphEditControls\URLDialog.Designer.cs">
+      <DependentUpon>URLDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DSGrapheditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DSGrapheditForm.Designer.cs">
+      <DependentUpon>DSGrapheditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DSGraphEditPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DSGraphEditPanel.Designer.cs">
+      <DependentUpon>DSGraphEditPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DSGraphEditControls\DSInputPin.cs">
+    </Compile>
+    <Compile Include="DSGraphEditControls\DSOutputPin.cs">
+    </Compile>
+    <Compile Include="InterfaceScanner.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DSGraphEditControls\PropertyPagePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DSGraphEditControls\TimeSliderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DSGraphEditControls\Utils.cs" />
+    <Compile Include="DSGraphEditControls\VideoInternalWindow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DSGraphEditControls\VideoInternalWindow.Designer.cs">
+      <DependentUpon>VideoInternalWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DMOParameterControls\DMONumericalParam.resx">
+      <DependentUpon>DMONumericalParam.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DSFiltersPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DSFiltersPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DSFilterTreeView\FilterPropertiesPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FilterPropertiesPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DSGraphEditControls\DSDaggerUIGraph.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DSDaggerUIGraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DSGraphEditControls\DSFilterNodeUI.resx">
+      <DependentUpon>DSFilterNodeUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DSFilterTreeView\DSFilterTreeView.resx">
+      <DependentUpon>DSFilterTreeView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DSGraphEditControls\PropertiesDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertiesDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DSGraphEditControls\PinsComboBoxForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PinsComboBoxForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DSGraphEditControls\ROTEntriesDialog.resx">
+      <DependentUpon>ROTEntriesDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DSGraphEditControls\URLDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>URLDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DSGraphEditControls\VideoInternalWindow.resx">
+      <DependentUpon>VideoInternalWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DSGrapheditForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DSGrapheditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DSGraphEditPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DSGraphEditPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DirectShowNet\DirectShowLib-2017.csproj">
+      <Project>{ce009bfa-5ef6-4153-b2a1-2fa79698a9ae}</Project>
+      <Name>DirectShowLib-2017</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

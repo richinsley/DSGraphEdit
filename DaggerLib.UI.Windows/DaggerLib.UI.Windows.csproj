@@ -1,0 +1,201 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A074956D-BA57-424F-8E44-0059C7C5BAE5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DaggerLib.UI.Windows</RootNamespace>
+    <AssemblyName>DaggerLib.UI.Windows</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>lib\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>lib\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DaggerLib, Version=1.0.2861.15740, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DaggerLib\DaggerLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AStar\AStar.cs" />
+    <Compile Include="AStar\Grid.cs" />
+    <Compile Include="AStar\Heap.cs" />
+    <Compile Include="BasePinContextMenuStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DaggerEventListener.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DaggerNodeTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DaggerNoodle.cs" />
+    <Compile Include="DaggerNoodleBisector.cs" />
+    <Compile Include="DaggerPinLegend.cs" />
+    <Compile Include="DaggerPropertyGrid\DaggerGraphPropertyGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DaggerPropertyGrid\DaggerGraphPropertyGrid.Designer.cs">
+      <DependentUpon>DaggerGraphPropertyGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DaggerPropertyGrid\PropertyGridEx\BrowsableTypeConverter.cs" />
+    <Compile Include="DaggerPropertyGrid\PropertyGridEx\CustomChoices.cs" />
+    <Compile Include="DaggerPropertyGrid\PropertyGridEx\CustomColorScheme.cs" />
+    <Compile Include="DaggerPropertyGrid\PropertyGridEx\CustomProperty.cs" />
+    <Compile Include="DaggerPropertyGrid\PropertyGridEx\CustomPropertyCollection.cs" />
+    <Compile Include="DaggerPropertyGrid\PropertyGridEx\CustomPropertyCollectionSet.cs" />
+    <Compile Include="DaggerPropertyGrid\PropertyGridEx\PropertyGridEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DaggerPropertyGrid\PropertyGridEx\PropertyGridEx.Designer.cs">
+      <DependentUpon>PropertyGridEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DaggerPropertyGrid\PropertyGridEx\UICustomEventEditor.cs" />
+    <Compile Include="DaggerPropertyGrid\PropertyGridEx\UIFilenameEditor.cs" />
+    <Compile Include="DaggerPropertyGrid\PropertyGridEx\UIListboxEditor.cs" />
+    <Compile Include="DaggerUIEnumerations.cs" />
+    <Compile Include="DaggerUIGraph.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DaggerUINode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DaggerUIOverlay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DaggerUISubNode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DaggerUISubNode.Designer.cs">
+      <DependentUpon>DaggerUISubNode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DoubleBufferedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Enumerations.cs" />
+    <Compile Include="GenericValueEditor.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PinUI.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Selector.cs" />
+    <Compile Include="SimpleImageButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TypeConstantNodeUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TypeConstantNodeUI.Designer.cs">
+      <DependentUpon>TypeConstantNodeUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIGraphNavigator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIGraphNavigator.Designer.cs">
+      <DependentUpon>UIGraphNavigator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ValueEditorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ValueEditorDialog.Designer.cs">
+      <DependentUpon>ValueEditorDialog.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DaggerNodeTreeView.resx">
+      <DependentUpon>DaggerNodeTreeView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DaggerPropertyGrid\DaggerGraphPropertyGrid.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DaggerGraphPropertyGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DaggerUIGraph.resx">
+      <DependentUpon>DaggerUIGraph.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DaggerUINode.resx">
+      <DependentUpon>DaggerUINode.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DaggerUISubNode.resx">
+      <DependentUpon>DaggerUISubNode.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TypeConstantNodeUI.resx">
+      <DependentUpon>TypeConstantNodeUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ValueEditorDialog.resx">
+      <DependentUpon>ValueEditorDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AStar\ReadMe.txt" />
+    <Content Include="DaggerPropertyGrid\PropertyGridEx\Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
